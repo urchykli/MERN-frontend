@@ -10,7 +10,7 @@ class Home extends Component {
 		}
 	}
 	componentDidMount () {
-    axios.get('http://localhost:3000/api/posts')
+    axios.get('http://localhost:3001/')
       .then((res) => {
         console.log(res)
         this.setState({

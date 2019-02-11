@@ -7,7 +7,7 @@ import { Route, Link } from "react-router-dom";
 import axios from 'axios'
 
 
-const url = "http://localhost:3000/api/posts";
+const url = "http://localhost:3001/";
 class App extends Component {
   constructor() {
     super()
