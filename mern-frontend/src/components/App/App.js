@@ -1,25 +1,44 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Show from '../Show/Show'
+import Create from '../Create/Create'
+import Home from '../Home/Home'
+import { Route, Link } from "react-router-dom";
+import axios from 'axios'
 
+
+const url = "http://localhost:3000/api/posts";
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      listOfPosts: []
+    }
+  }
+  componentDidMount(){
+    axios.get(url)
+    .then((response) => {
+      this.setState({listOfPosts: response.data})
+    })
+    console.log(this.state.listOfPosts)
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <nav>
+        hi
+          <Link to="/">
+          <h1>Chatter</h1>
+          </Link>
+          <Link to="/create">
+          <h1>New Post</h1>
+          </Link>
+        </nav>
+        <main>
+          <Route path="/" exact render={(routerProps) => <Home {...routerProps} {...this.state} />} />
+          <Route path="/create" render={() => <Create />} />
+          <Route path="/show/:title" render={(routerProps) => <Show {...routerProps} {...this.state} />} />
+        </main>
       </div>
     );
   }
