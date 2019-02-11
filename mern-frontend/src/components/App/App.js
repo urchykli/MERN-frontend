@@ -37,7 +37,7 @@ class App extends Component {
         <main>
           <Route path="/" exact render={(routerProps) => <Home {...routerProps} {...this.state} />} />
           <Route path="/create" render={() => <Create />} />
-          <Route path="/show/:title" render={(routerProps) => <Show {...routerProps} {...this.state} />} />
+          <Route path="/show/:_id" render={(routerProps) => <Show {...routerProps} {...this.state} />} />
         </main>
       </div>
     );

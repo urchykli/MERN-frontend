@@ -22,10 +22,12 @@ class Home extends Component {
       })
   }
   render() {
+		console.log(this.state.posts)
     let posts = this.state.posts.map(item => {
       return (
         <div className="posts-home" key={item.posts}>
-          <Link to={"/show/" + item.title}>
+          <Link to={"/show/" + item._id}>
+          {/* <Link to={"/show/"}> */}
             <div>
 							<h1>{item.title}</h1>
 							<p>{item.content}</p>
