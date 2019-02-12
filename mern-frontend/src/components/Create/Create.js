@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from "axios";
 
 class Create extends Component {
 	constructor() {
@@ -8,18 +9,14 @@ class Create extends Component {
       title: "",
       content: ""
 		}
-		this.handleChange = this.handleChange.bind(this)
 	}
-	handleChange(e) {
-    // console.log(name, value)
-    this.setState({[e.target.name]: e.target.value})
-	}
+
 	handleSubmit(e) {
-    const url = "http://localhost:3001/show";
-    const soloPost = this.props.match.params._id;
+    const url = "http://localhost:3001/create";
+    // const soloPost = this.props.match.params._id;
     e.preventDefault();
     axios
-      .put(`${url}/${soloPost}`, {
+      .put(`${url}`, {
         title: this.state.title,
         content: this.state.content
       })
@@ -32,9 +29,9 @@ class Create extends Component {
 			<div>
 				<form onSubmit={this.handleSubmit}>
       	<div className="form">
-        <input name="title" type="text" value={this.state.title} onChange={this.handleChange} placeholder="Title" />
+        <input name="title" type="text" value={this.state.title} placeholder="Title" />
 				<br/>
-        <input name="content" type="text" value={this.state.content} onChange={this.handleChange} placeholder="Content" />
+        <input name="content" type="text" value={this.state.content} placeholder="Content" />
 				<br/>
         <input type="submit" value="Submit" />
       </div>
