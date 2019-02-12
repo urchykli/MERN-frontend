@@ -5,8 +5,12 @@ class Show extends Component {
 	constructor (props) {
     super(props)
     this.state = {
-      onePost: []
-		}
+      onePost: [],
+      title: '',
+      content: ''
+
+    }
+    this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	componentDidMount () {
@@ -23,14 +27,19 @@ class Show extends Component {
       .catch((err) => {
         console.log(err)
       })
-	}
-  handleSubmit () {
-    axios.put('http://localhost:3001', {
-      title: this.props.title,
-      content: this.props.content
-    })
-    .then(() => {
-      this.props.posts.push('/')
+  }
+  handleChange(e) {
+    // console.log(name, value)
+    this.setState({[e.target.name]: e.target.value})
+  }
+  handleSubmit (e) {
+    console.log('handleSubmit called')
+    const url = 'http://localhost:3001/show'
+    const soloPost = this.props.match.params._id
+    e.preventDefault()
+    axios.put(`${url}/${soloPost}`, {
+      title: this.state.title,
+      content: this.state.content
     })
     .catch((err) => {
       console.log(err)
@@ -38,7 +47,8 @@ class Show extends Component {
   }
 	render() {
 		console.log("show rendered")
-		console.log(this.state.onePost)
+    console.log(this.state.onePost)
+    console.log(this.state.title)
 		return (
 			<div>
 				<h1>{this.state.onePost.title}</h1>
@@ -46,9 +56,9 @@ class Show extends Component {
 				<h4>{this.state.onePost.createdAt}</h4>
 				<form onSubmit={this.handleSubmit}>
       	<div className="form">
-        <input name="title" type="text" entered={this.state.title} value={this.state.onePost.title} placeholder="Title" />
+        <input name="title" type="text" value={this.state.title} onChange={this.handleChange} placeholder="Title" />
 				<br/>
-        <input name="content" type="text" entered={this.state.content} value={this.state.onePost.content} placeholder="Content" />
+        <input name="content" type="text" value={this.state.content} onChange={this.handleChange} placeholder="Content" />
 				<br/>
         <input type="submit" value="Update" />
       </div>
