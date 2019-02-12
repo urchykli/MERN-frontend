@@ -34,8 +34,17 @@ class Show extends Component {
       [title]: value
     });
   }
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit () {
+    axios.post('http://localhost:3001', {
+      title: this.props.title,
+      content: this.state.content
+    })
+    .then(() => {
+      this.props.posts.push('/')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 	render() {
 		console.log("show rendered")
@@ -47,9 +56,9 @@ class Show extends Component {
 				<h4>{this.state.onePost.createdAt}</h4>
 				<form onSubmit={this.handleSubmit}>
       	<div className="form">
-        <input name="title" type="text" entered={this.state.title} value={this.state.onePost.title} onChange={this.handleInputChange} />
+        <input name="title" type="text" entered={this.state.title} value={this.state.onePost.title} onChange={this.handleInputChange} placeholder="Title" />
 				<br/>
-        <input name="content" type="text" value={this.state.content} onChange={this.handleInputChange} value={this.state.onePost.content} />
+        <input name="content" type="text" value={this.state.content} onChange={this.handleInputChange} value={this.state.onePost.content} placeholder="Content" />
 				<br/>
         <input type="submit" value="Update" />
       </div>
