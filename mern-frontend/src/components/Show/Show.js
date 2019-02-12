@@ -29,6 +29,7 @@ class Show extends Component {
         console.log(err);
       });
   }
+  
   handleChange(e) {
     // console.log(name, value)
     this.setState({ [e.target.name]: e.target.value });
