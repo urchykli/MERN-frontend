@@ -61,7 +61,7 @@ class Show extends Component {
       <div>
         <h1>{this.state.onePost.title}</h1>
         <p>{this.state.onePost.content}</p>
-        <h4>{this.state.onePost.createdAt}</h4>
+        {/* <h4>{this.state.onePost.createdAt}</h4> */}
         <form onSubmit={this.handleSubmit}>
           <div className="form">
             <input

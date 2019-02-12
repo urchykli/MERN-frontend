@@ -4,13 +4,28 @@ class Create extends Component {
 	constructor() {
 		super()
 		this.state = {
-
+			onePost: [],
+      title: "",
+      content: ""
 		}
 		this.handleChange = this.handleChange.bind(this)
 	}
 	handleChange(e) {
     // console.log(name, value)
     this.setState({[e.target.name]: e.target.value})
+	}
+	handleSubmit(e) {
+    const url = "http://localhost:3001/show";
+    const soloPost = this.props.match.params._id;
+    e.preventDefault();
+    axios
+      .put(`${url}/${soloPost}`, {
+        title: this.state.title,
+        content: this.state.content
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 	render() {
 		return (
