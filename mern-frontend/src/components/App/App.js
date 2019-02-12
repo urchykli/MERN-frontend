@@ -26,7 +26,6 @@ class App extends Component {
     return (
       <div className="App">
       <nav>
-        hi
           <Link to="/">
           <h1>Chatter</h1>
           </Link>
