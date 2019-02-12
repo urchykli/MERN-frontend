@@ -46,10 +46,11 @@ class Show extends Component {
         console.log(err);
       });
   }
-  handleDestroy(e) {
+  handleDestroy() {
     // const url = "http://localhost:3001/show";
     // const soloPost = this.props.match.params._id;
-    axios.delete("http://localhost:3001/show", { params: { id: e } });
+    let birdMan = this.props.match.params._id
+    axios.delete(`http://localhost:3001/show/${birdMan}`, { });
   }
   render() {
     console.log("show rendered");
@@ -82,7 +83,7 @@ class Show extends Component {
           </div>
         </form>
         <form method="delete">
-        <input type="submit" value="Delete" onClick={this.handleDestroy(this)} />
+        <input type="submit" value="Delete" onClick={this.handleDestroy} />
         </form>
       </div>
     );
