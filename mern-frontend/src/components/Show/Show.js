@@ -7,7 +7,6 @@ class Show extends Component {
     this.state = {
       onePost: []
 		}
-		this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	componentDidMount () {
@@ -25,19 +24,10 @@ class Show extends Component {
         console.log(err)
       })
 	}
-	handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'text' ? target.entered : target.value;
-    const title = target.title;
-
-    this.setState({
-      [title]: value
-    });
-  }
   handleSubmit () {
-    axios.post('http://localhost:3001', {
+    axios.put('http://localhost:3001', {
       title: this.props.title,
-      content: this.state.content
+      content: this.props.content
     })
     .then(() => {
       this.props.posts.push('/')
@@ -56,9 +46,9 @@ class Show extends Component {
 				<h4>{this.state.onePost.createdAt}</h4>
 				<form onSubmit={this.handleSubmit}>
       	<div className="form">
-        <input name="title" type="text" entered={this.state.title} value={this.state.onePost.title} onChange={this.handleInputChange} placeholder="Title" />
+        <input name="title" type="text" entered={this.state.title} value={this.state.onePost.title} placeholder="Title" />
 				<br/>
-        <input name="content" type="text" value={this.state.content} onChange={this.handleInputChange} value={this.state.onePost.content} placeholder="Content" />
+        <input name="content" type="text" entered={this.state.content} value={this.state.onePost.content} placeholder="Content" />
 				<br/>
         <input type="submit" value="Update" />
       </div>
